@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anant Bhakar</title>
+  <meta name="description" content="Anant Bhakar is a Computer Science student at the University of Toronto who builds full-stack and machine learning projects and organises hackathons." />
+  <meta name="theme-color" content="#16382a" />
+  <meta property="og:title" content="Anant Bhakar" />
+  <meta property="og:description" content="CS at the University of Toronto. Full-stack and machine learning projects, hackathons, and a small game about escaping the business major." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://anantbhakar.com/" />
+  <link rel="icon" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Geist:wght@400;500;600&family=Pixelify+Sans:wght@400;500;600;700&family=Silkscreen&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+  <!-- Pixelate filters for the big titles: harden the edges, sample one pixel per block, then grow it to fill the block. -->
+  <svg class="sr-defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <filter id="px3" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feComponentTransfer in="SourceGraphic" result="hard"><feFuncA type="discrete" tableValues="0 1" /></feComponentTransfer><feFlood x="1" y="1" width="1" height="1" /><feComposite width="3" height="3" /><feTile result="t" /><feComposite in="hard" in2="t" operator="in" /><feMorphology operator="dilate" radius="1" /></filter>
+    <filter id="px2" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feComponentTransfer in="SourceGraphic" result="hard"><feFuncA type="discrete" tableValues="0 1" /></feComponentTransfer><feFlood x="0" y="0" width="1" height="1" /><feComposite width="2" height="2" /><feTile result="t" /><feComposite in="hard" in2="t" operator="in" /><feMorphology operator="dilate" radius="0.5" /></filter>
+  </svg>
+  <div class="intro" aria-hidden="true">
+    <div class="intro__half intro__half--l"></div>
+    <div class="intro__half intro__half--r"></div>
+    <span class="intro__seam"></span>
+    <img class="intro__sprite" src="/art/badge-runner.svg" alt="" width="48" height="56" />
+  </div>
+
+  <a class="skip" href="#about">Skip to content</a>
+
+  <header class="nav-wrap">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav__mark" href="#top" aria-label="Anant Bhakar, back to top">
+        <svg viewBox="0 0 11 13" width="22" height="26" aria-hidden="true" shape-rendering="crispEdges" fill="currentColor">
+          <path d="M3 0h5v1h1v1h1v1H1V2h1V1h1zM2 4h7v1H2zM3 5h1v3h1v1H4v2h1v1H3v1H2v-2h1V9H2V8h1zM7 5h1v3h1v1H8v2h1v2H8v-1H6v-1h1V9H6V8h1z" />
+          <path d="M3 3h5v1H3z" opacity=".35" />
+        </svg>
+      </a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a class="nav__cta" href="#resume">Resume</a></li>
+      </ul>
+      <span class="nav__walker" aria-hidden="true"></span>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="Introduction">
+      <div class="hero__scene">
+        <!--HERO_ART-->
+      </div>
+      <h1 class="hero__logo" data-parallax data-speed="0.46">Anant Bhakar</h1>
+      <div class="hero__card">
+        <p class="hero__lede">CS @ University of Toronto. I build full-stack + AI/ML projects, and run hackathons.</p>
+        <div class="hero__actions">
+          <a class="btn btn--light" href="#game" data-play>Be me for a day</a>
+          <a class="link" href="#about">Skip to my work</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="game" id="game" aria-labelledby="game-title">
+      <div class="game__inner">
+        <div class="game__head">
+          <h2 class="game__title" id="game-title">Escape the business major</h2>
+          <p class="game__sub">Run!!! They want a quick coffee chat. Eat every <code>{ }</code>, grab coffee to turn the tables, and don't get networked.</p>
+        </div>
+
+        <div class="arcade" data-game>
+          <dl class="arcade__hud">
+            <div><dt>Score</dt><dd data-score>0</dd></div>
+            <div><dt>Best</dt><dd data-best>0</dd></div>
+            <div><dt>Lives</dt><dd data-lives>3</dd></div>
+          </dl>
+          <div class="arcade__screen">
+            <canvas tabindex="0" aria-label="Maze game. Use arrow keys or WASD to move, space to pause." data-canvas></canvas>
+            <div class="arcade__overlay" data-overlay>
+              <p class="arcade__overlay-title" data-overlay-title></p>
+              <p class="arcade__overlay-text" data-overlay-text></p>
+              <button class="arcade__btn" type="button" data-overlay-btn>Play</button>
+            </div>
+          </div>
+          <div class="arcade__pad" aria-label="Direction controls">
+            <button type="button" data-dir="up" aria-label="Up">▲</button>
+            <button type="button" data-dir="left" aria-label="Left">◀</button>
+            <button type="button" data-dir="down" aria-label="Down">▼</button>
+            <button type="button" data-dir="right" aria-label="Right">▶</button>
+          </div>
+          <p class="arcade__hint">Arrow keys or WASD to move. Space to pause. On a phone, swipe or use the pad.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about" id="about" aria-labelledby="about-title">
+      <div class="wrap split">
+        <div class="prose">
+          <h2 id="about-title">I like building things from scratch.</h2>
+          <p>I'm a Computer Science student at the University of Toronto. Most of what I make lives where algorithms meet people: a chess trainer built on the Lichess API, an adaptive math platform, and a sign language translator powered by a model I trained myself.</p>
+          <p>Outside of code I organise. I co-founded Scrapyard Toronto, a 150-person hackathon, and spent three years running hackathons and web dev workshops for 400+ students at Chinguacousy's SciTech program.</p>
+        </div>
+        <aside class="card facts" aria-label="Quick facts">
+          <dl>
+            <div><dt>Studying</dt><dd>Honours Bachelor of Computer Science, University of Toronto, class of 2030</dd></div>
+            <div><dt>Based in</dt><dd>Toronto, Ontario</dd></div>
+            <div><dt>Focus</dt><dd>Full-stack web and machine learning</dd></div>
+            <div><dt>Languages</dt><dd>Python, JavaScript, C++, SQL, HTML/CSS</dd></div>
+            <div><dt>Frameworks</dt><dd>React, Next.js, Django, Flask, Tailwind CSS</dd></div>
+            <div><dt>Tools</dt><dd>Git, Figma, Convex, Clerk, TensorFlow, scikit-learn</dd></div>
+            <div><dt>Certificates</dt><dd>Harvard CS50AI, CS50W, CS50 Cybersecurity</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section projects" id="projects" aria-labelledby="projects-title">
+      <div class="wrap">
+        <h2 id="projects-title">Projects</h2>
+        <ul class="proj-list">
+          <li class="proj" data-preview="/art/chesscircuit.svg">
+            <h3 class="proj__heading">
+              <button class="proj__toggle" type="button" aria-expanded="false" aria-controls="proj-chesscircuit">
+                <span class="proj__name">ChessCircuit</span>
+                <span class="proj__blurb">Daily chess training plans built from your Lichess games</span>
+                <span class="proj__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="proj__panel" id="proj-chesscircuit" inert>
+              <div class="proj__clip">
+                <div class="feature card">
+                  <div class="feature__text">
+                    <p class="feature__lede">A full-stack chess training platform that pulls your games from the Lichess API and turns them into a personalised daily plan.</p>
+                    <ul class="bullets">
+                    <li>Django APIs and models for profiles, daily goals, and custom training tasks</li>
+                    <li>React dashboards for rating history, games, and long-term progress</li>
+                    <li>Browser notifications and automatic daily resets to keep the streak going</li>
+                    </ul>
+                    <p class="stack">React, Django, Lichess API, JavaScript</p>
+                    <a class="btn btn--accent" href="https://github.com/Prosesser" target="_blank" rel="noopener">View on GitHub</a>
+                  </div>
+                  <div class="feature__art"><img src="/art/chesscircuit.svg" alt="" width="160" height="160" loading="lazy" /></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="proj" data-preview="/art/integralearn.svg">
+            <h3 class="proj__heading">
+              <button class="proj__toggle" type="button" aria-expanded="false" aria-controls="proj-integralearn">
+                <span class="proj__name">IntegraLearn</span>
+                <span class="proj__blurb">An AI math tutor that adapts to what you get wrong</span>
+                <span class="proj__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="proj__panel" id="proj-integralearn" inert>
+              <div class="proj__clip">
+                <div class="feature card">
+                  <div class="feature__text">
+                    <p class="feature__lede">An AI-assisted math platform with personalised assessments and practice that adapts as you learn.</p>
+                    <ul class="bullets">
+                    <li>Adaptive practice recommendations based on assessment results</li>
+                    <li>Secure sign-in with Clerk and real-time data sync with Convex</li>
+                    <li>Dashboards that show performance and progress by topic</li>
+                    </ul>
+                    <p class="stack">React, Convex, Clerk, AI</p>
+                    <a class="btn btn--accent" href="https://github.com/Prosesser" target="_blank" rel="noopener">View on GitHub</a>
+                  </div>
+                  <div class="feature__art"><img src="/art/integralearn.svg" alt="" width="160" height="160" loading="lazy" /></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="proj" data-preview="/art/unisign.svg">
+            <h3 class="proj__heading">
+              <button class="proj__toggle" type="button" aria-expanded="false" aria-controls="proj-unisign">
+                <span class="proj__name">UniSign</span>
+                <span class="proj__blurb">Sign language to text, in more than one language</span>
+                <span class="proj__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="proj__panel" id="proj-unisign" inert>
+              <div class="proj__clip">
+                <div class="feature card">
+                  <div class="feature__text">
+                    <p class="feature__lede">A sign language translator built on a model I trained myself, with a Next.js front end.</p>
+                    <ul class="bullets">
+                    <li>Custom Random Forest classifier that reaches 92% accuracy</li>
+                    <li>Multilingual translation of recognised signs</li>
+                    <li>Built with accessibility as the starting point</li>
+                    </ul>
+                    <p class="stack">Next.js, Python, scikit-learn</p>
+                    <a class="btn btn--accent" href="https://github.com/Prosesser" target="_blank" rel="noopener">View on GitHub</a>
+                  </div>
+                  <div class="feature__art"><img src="/art/unisign.svg" alt="" width="160" height="160" loading="lazy" /></div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="proj" data-preview="/art/mp4.svg">
+            <h3 class="proj__heading">
+              <button class="proj__toggle" type="button" aria-expanded="false" aria-controls="proj-mp4">
+                <span class="proj__name">MP4 Compressor and Editor</span>
+                <span class="proj__blurb">Shrink and trim video files without leaving your desktop</span>
+                <span class="proj__icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="proj__panel" id="proj-mp4" inert>
+              <div class="proj__clip">
+                <div class="feature card">
+                  <div class="feature__text">
+                    <p class="feature__lede">A small desktop tool for compressing and trimming MP4 files.</p>
+                    <ul class="bullets">
+                    <li>FFmpeg under the hood for compression and trimming</li>
+                    <li>A simple Tkinter interface, no command line needed</li>
+                    </ul>
+                    <p class="stack">Python, FFmpeg, Tkinter</p>
+                    <a class="btn btn--accent" href="https://github.com/Prosesser/MP4-File-Compressor-and-Editor" target="_blank" rel="noopener">View on GitHub</a>
+                  </div>
+                  <div class="feature__art"><img src="/art/mp4.svg" alt="" width="160" height="160" loading="lazy" /></div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="orb" aria-hidden="true"><img alt="" /></div>
+    </section>
+
+    <section class="section experience" id="experience" aria-labelledby="experience-title">
+      <div class="wrap">
+        <h2 id="experience-title">Experience</h2>
+        <ol class="timeline">
+          <li>
+            <p class="timeline__when">Sep 2023 – May 2026</p>
+            <div>
+              <h3>Director</h3>
+              <p class="timeline__where">SciTech Activity Committee, Chinguacousy Secondary School</p>
+              <ul class="bullets">
+                <li>Planned hackathons and technical workshops serving 400+ students</li>
+                <li>Designed beginner web development workshops on HTML, CSS, and JavaScript</li>
+                <li>Helped secure $15K+ in sponsorships and ran event operations</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <p class="timeline__when">May – Aug 2025</p>
+            <div>
+              <h3>Student Tutor</h3>
+              <p class="timeline__where">Peel District School Board, Caledon</p>
+              <ul class="bullets">
+                <li>Mentored 50 students through programming workshops on computational thinking and problem-solving</li>
+                <li>Led collaborative coding activities</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <p class="timeline__when">Jan – Mar 2025</p>
+            <div>
+              <h3>Co-Founder</h3>
+              <p class="timeline__where">Scrapyard Toronto, Hack Club at Toronto Metropolitan University</p>
+              <ul class="bullets">
+                <li>Co-founded a student hackathon with 150+ participants</li>
+                <li>Secured $10K+ in sponsorships and drove 20K+ social media impressions</li>
+                <li>Ran logistics, finance, and event coordination</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section achievements" aria-labelledby="achievements-title">
+      <div class="wrap">
+        <h2 id="achievements-title">Achievements</h2>
+        <ul class="badges">
+          <li class="badge">
+            <span class="badge__icon"><img src="/art/badge-medal.svg" alt="" width="12" height="14" /></span>
+            <div>
+              <h3>Math Department Award</h3>
+              <p>Highest marks in the graduating class of 340, with 99% in two U-level math courses.</p>
+              <p class="badge__meta">Chinguacousy S.S., June 2026</p>
+            </div>
+          </li>
+          <li class="badge">
+            <span class="badge__icon"><img src="/art/badge-trophy.svg" alt="" width="12" height="14" /></span>
+            <div>
+              <h3>Euclid and Canadian Senior Math Contests</h3>
+              <p>School champion, 1st of 1,350 students, top 10% internationally.</p>
+              <p class="badge__meta">University of Waterloo, 2025/26</p>
+            </div>
+          </li>
+          <li class="badge">
+            <span class="badge__icon"><img src="/art/badge-king.svg" alt="" width="12" height="14" /></span>
+            <div>
+              <h3>Peel Region Chess Champion</h3>
+              <p>Won the regional championship.</p>
+              <p class="badge__meta">February 2025</p>
+            </div>
+          </li>
+          <li class="badge">
+            <span class="badge__icon"><img src="/art/badge-star.svg" alt="" width="12" height="14" /></span>
+            <div>
+              <h3>Cayley Math Contest</h3>
+              <p>School champion and honour roll, top 1% internationally.</p>
+              <p class="badge__meta">University of Waterloo, February 2024</p>
+            </div>
+          </li>
+          <li class="badge badge--secret" data-secret>
+            <span class="badge__icon"><img src="/art/badge-locked.svg" alt="" width="12" height="14" data-secret-icon /></span>
+            <div>
+              <h3 data-secret-title>Locked</h3>
+              <p data-secret-text>Beat the game at the top of the page to unlock this one.</p>
+              <p class="badge__meta" data-secret-meta>Hidden achievement</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section resume" id="resume" aria-labelledby="resume-title">
+      <div class="wrap split">
+        <div class="prose">
+          <h2 id="resume-title">Resume</h2>
+          <p>Everything above on one page: education, projects, experience, and skills.</p>
+          <div class="row">
+            <a class="btn btn--solid" href="/AnantBhakar_Resume.pdf" download>Download PDF</a>
+            <a class="link" href="/AnantBhakar_Resume.pdf" target="_blank" rel="noopener">Open in a new tab</a>
+          </div>
+        </div>
+        <div class="clipboard">
+          <svg class="clipboard__clip" viewBox="0 0 30 12" aria-hidden="true" shape-rendering="crispEdges">
+            <rect x="9" y="0" width="12" height="4" fill="#9aa59c" /><rect x="11" y="1" width="8" height="2" fill="#16382a" />
+            <rect x="3" y="4" width="24" height="8" fill="#b8c2ba" /><rect x="3" y="10" width="24" height="2" fill="#7f8b82" />
+          </svg>
+          <div class="clipboard__paper">
+            <object data="/AnantBhakar_Resume.pdf#toolbar=0&amp;navpanes=0&amp;view=FitH" type="application/pdf" aria-label="Resume preview">
+              <p class="resume__fallback">Your browser can't preview PDFs here. <a href="/AnantBhakar_Resume.pdf">Open the resume</a>.</p>
+            </object>
+            <span class="stamp" aria-hidden="true">Ready-ish</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <div class="contact__card">
+          <svg class="contact__ridges" viewBox="0 0 1200 200" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 120 C160 70 260 110 400 80 S700 40 820 90 1080 60 1200 100 V200 H0Z" fill="#1f4a35" />
+            <path d="M0 160 C200 120 340 150 520 130 S860 110 1000 140 1140 130 1200 140 V200 H0Z" fill="#265a40" />
+          </svg>
+          <h2 id="contact-title">Say hello.</h2>
+          <p>Internships, hackathons, a game of chess. LinkedIn is the fastest way to reach me.</p>
+          <a class="contact__big" href="https://www.linkedin.com/in/anantbhakar" target="_blank" rel="noopener">Message me on LinkedIn</a>
+          <div class="row">
+            <a class="btn btn--light" href="https://github.com/Prosesser" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn btn--light" href="#resume">Resume</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p class="footer__line">Made in Toronto.</p>
+      <ul class="footer__links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#resume">Resume</a></li>
+        <li><a href="https://github.com/Prosesser" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/anantbhakar" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
+    <div class="scene">
+      <canvas class="scene__canvas" aria-hidden="true"></canvas>
+      <div class="scene__bar">
+        <p>© 2026 Anant Bhakar</p>
+        <a href="#top">Back to the top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

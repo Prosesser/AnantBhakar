@@ -1,0 +1,11 @@
+# dependencies and build output
+node_modules
+dist
+
+# OS / editor
+.DS_Store
+*.log
+.claude/
+
+# duplicate of public/AnantBhakar_Resume.pdf
+reference/AnantBhakar_Resume.pdf
