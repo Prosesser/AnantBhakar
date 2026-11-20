@@ -11,15 +11,23 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://anantbhakar.com/" />
   <link rel="icon" href="/favicon.png" />
+  <script>
+    // Pixelated titles: Chromium renders them with an SVG filter on the text (.px-titles).
+    // Safari/WebKit (every iOS browser) draws filtered text invisible, so there a canvas redraws them (.px-canvas).
+    (function () {
+      var ua = navigator.userAgent;
+      var chromium = /Chrome\//.test(ua) && !/CriOS|FxiOS|EdgiOS/.test(ua) && !/[?&]px=canvas/.test(location.search); // ?px=canvas previews the Safari version
+      document.documentElement.classList.add(chromium ? 'px-titles' : 'px-canvas');
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Geist:wght@400;500;600&family=Pixelify+Sans:wght@400;500;600;700&family=Silkscreen&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/src/styles.css" />
 </head>
 <body>
-  <!-- Pixelate filters for the big titles: harden the edges, sample one pixel per block, then grow it to fill the block. -->
+  <!-- Pixelate filter for the big titles (Chromium): harden the edges, sample one pixel per 2×2 block, then grow it to fill the block. -->
   <svg class="sr-defs" width="0" height="0" aria-hidden="true" focusable="false">
-    <filter id="px3" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feComponentTransfer in="SourceGraphic" result="hard"><feFuncA type="discrete" tableValues="0 1" /></feComponentTransfer><feFlood x="1" y="1" width="1" height="1" /><feComposite width="3" height="3" /><feTile result="t" /><feComposite in="hard" in2="t" operator="in" /><feMorphology operator="dilate" radius="1" /></filter>
     <filter id="px2" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feComponentTransfer in="SourceGraphic" result="hard"><feFuncA type="discrete" tableValues="0 1" /></feComponentTransfer><feFlood x="0" y="0" width="1" height="1" /><feComposite width="2" height="2" /><feTile result="t" /><feComposite in="hard" in2="t" operator="in" /><feMorphology operator="dilate" radius="0.5" /></filter>
   </svg>
   <div class="intro" aria-hidden="true">

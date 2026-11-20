@@ -1,4 +1,5 @@
 import { Game } from './game/game';
+import { initPixelTitles } from './pixelTitles';
 import { initProjects } from './projects';
 import { initFlair } from './flair';
 import { initScene } from './scene';
@@ -89,3 +90,4 @@ initProjects(reduceMotion);
 initFlair(reduceMotion);
 initScene(reduceMotion);
 initNavWalker(reduceMotion);
+initPixelTitles();

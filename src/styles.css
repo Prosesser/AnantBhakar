@@ -1,4 +1,8 @@
 /* ── Tokens: General Intelligence Company system, re-greened ───────────────── */
+/* Static cuts of Fraunces (OFL) for the pixel titles, so the page layout and the pixel canvas use identical glyphs */
+@font-face { font-family: 'Fraunces Titles'; src: url('/fonts/fraunces-titles.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Fraunces Display'; src: url('/fonts/fraunces-display.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+
 :root {
   --parchment: #fefffc;
   --paper: #ffffff;
@@ -38,9 +42,7 @@ body {
 }
 img, svg, canvas { display: block; max-width: 100%; }
 a { color: inherit; }
-/* Big titles: a serif pixelated by an SVG filter (bitmap-serif look). Smaller headings stay smooth so they read easily. */
-.sr-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
-.hero__logo, h2, .footer__line, .contact__big { filter: url(#px2); font-variation-settings: 'opsz' 9, 'SOFT' 0, 'WONK' 0; }
+/* Big titles: a serif redrawn as pixels on a canvas by src/pixelTitles.ts (bitmap-serif look). Smaller headings stay smooth so they read easily. */
 h3 { font-variation-settings: 'opsz' 36, 'SOFT' 50, 'WONK' 0; }
 h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 400; color: var(--graphite); font-variant-ligatures: none; }
 h2 { font-size: clamp(40px, 5vw, 58px); line-height: 1.08; letter-spacing: -0.015em; font-weight: 600; }
@@ -415,3 +417,14 @@ html.is-intro { overflow: hidden; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
 }
+
+/* Pixel titles (src/pixelTitles.ts): the real text stays for selection and screen readers, the canvas shows the pixels */
+:where(.px-on) { position: relative; }
+.px-on { color: transparent !important; }
+.px-title { position: absolute; z-index: 0; pointer-events: none; image-rendering: pixelated; }
+/* Chromium: original look, SVG filter on the live text */
+.sr-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.px-titles :is(.hero__logo, h2, .footer__line, .contact__big) { filter: url(#px2); }
+/* Safari / iOS: static cuts so the canvas (src/pixelTitles.ts) draws the exact glyphs the page laid out */
+.px-canvas :is(h2, .footer__line, .contact__big) { font-family: 'Fraunces Titles', var(--display); font-weight: 400; }
+.px-canvas .hero__logo { font-family: 'Fraunces Display', var(--display); font-weight: 400; }
