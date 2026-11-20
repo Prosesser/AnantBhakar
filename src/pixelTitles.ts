@@ -7,12 +7,14 @@ const SELECTOR = '.hero__logo, h2, .footer__line, .contact__big';
 const BLOCK = 2; // CSS px per "pixel"
 
 // Titles use static font files (see @font-face in styles.css) so the canvas draws exactly the glyphs the page laid out.
+// They're loaded here explicitly too: on first load Safari may not have registered the stylesheet's faces yet,
+// and asking for them by name would come back empty.
 async function loadFonts() {
-  const loaded = await Promise.all([
-    document.fonts.load("400 48px 'Fraunces Titles'"),
-    document.fonts.load("400 48px 'Fraunces Display'"),
-  ]);
-  if (loaded.some((faces) => !faces.length)) throw new Error('title fonts unavailable');
+  const faces = [
+    new FontFace('Fraunces Titles', "url('/fonts/fraunces-titles.woff2') format('woff2')", { weight: '400' }),
+    new FontFace('Fraunces Display', "url('/fonts/fraunces-display.woff2') format('woff2')", { weight: '400' }),
+  ];
+  await Promise.all(faces.map(async (f) => document.fonts.add(await f.load())));
 }
 
 function draw(el: HTMLElement) {

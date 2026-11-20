@@ -48,6 +48,8 @@ const frame = () => {
 };
 frame();
 window.addEventListener('resize', frame);
+// Safari can report the hero's height before 100svh settles, so also re-crop whenever the hero itself resizes.
+new ResizeObserver(frame).observe(hero);
 
 // ── Mobile nav ──────────────────────────────────────────────────────────────
 const toggle = document.querySelector<HTMLButtonElement>('.nav__toggle')!;
